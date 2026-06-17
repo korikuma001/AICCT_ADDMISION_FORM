@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks sheet</title>
+</head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    table,th,tr,td{
+        border: 5px solid black;
+    }
+    .hifi-btn{
+        color: white;
+        --bg: #0f172a;
+        --accent: #38bdf8;
+        --text: #e5e7eb;
+
+        position: relative;
+        padding: 14px 32px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+
+        color: cer(--text--);
+        background: linear-gradient(135deg, #020617, var(--bg) 60%);
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        border-radius: 12px;
+        cursor: pointer; 
+        isolation: isolate;
+         
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0,0.45), inset 0 1px 0 rgba(255, 255, 255, 0
+        08);
+        
+        transition: 
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        box-color 0.15s ease;
+    }
+    .hifi-btn::before{
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        background: linear-gradient(120deg, transparent, var(--accent), transparent);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.2s ease;
+    }
+    .hifi-btn:hover{
+        transform: translateY(-2px);
+        border-color: rgba(56, 189, 248, 0.6);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 20px rgba(56, 189, 248, 0.35);
+    }
+    .hifi-btn:hover::before{
+        opacity: 0.6;
+    }
+    .hifi-btn:active{
+        transform: translateY(0);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5), inset 0 3px 6px rgba(0, 0, 0, 0.6);
+    }
+    .hifi-btn:focus-visible{
+        outline: none;
+        box-sizing: 0 0 0 3px rgba(56, 189, 248, 0.5), 0 14px 30px rgba(0, 0, 0, 0.6);
+    }
+</style> 
+
+<body>
+        <form id="marksForm">
+            <table>
+                <tr>
+                    <th>Enter your Roll NO.</th>
+                    <td><input type="text" name="rollno" id="rollNo" placeholder="Enter your RollNo"></td>
+                </tr>
+                <tr>
+                    <th>Enter Name</th>
+                    <td><input type="text" name="Name" id="Name" placeholder="Enter Name"></td>
+                </tr>
+                <tr>
+                    <th>Enter Math marks</th>
+                    <td><input type="text" name="txt1" id="math" placeholder="Enter Math Marks"></td>
+                </tr>
+                <tr>
+                    <th>Enter eng. marks</th>
+                    <td><input type="text" name="txt2" id="eng" placeholder="Enter eng. marks"></td>
+                </tr>
+                <tr>
+                    <th>Enter Hindi marks</th>
+                    <td><input type="text" name="txt3" id="hindi" placeholder="Enter Hindi marks"></td>
+                </tr>
+                <tr>
+                    <th>Enter science marks</th>
+                    <td><input type="text" name="txt4" id="science" placeholder="Enter science marks"></td>
+                </tr>
+                <tr>
+                    <th>Enter computer Marks</th>
+                    <td><input type="text" name="txt5" id="computer" placeholder="Enter computer marks"></td>
+                </tr>
+                <tr>
+                    <th>Enter PT Marks</th>
+                    <td><input type="text" name="txt5" id="PT" placeholder="Enter PT marks"></td>
+                </tr>
+                <tr>
+                    <td><button type="button"  onClick="clearForm()" class="hifi-btn">clear all</button></td>
+                    <td><button type="button"  onClick="result(); validate();" class="hifi-btn">submit</button></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td> <input type="text" name="txt6" id="Addition" placeholder="your total marks shown here"> </td>
+                </tr>
+                <tr>
+                    <th>persentage</th>
+                    <td><input type="text" name="txt6" id="persentage" placeholder="your persentage shown here"></td>
+                </tr>
+                <tr>
+                    <th>Grade</th>
+                    <td><input type="text" name="grade" id="grade" placeholder="your Grade shown here"></td>
+                </tr>
+            </table>
+        </form>
+</body>
+
+<script lang="javascript">
+
+    let m,e,h,s,c,pt,rn,n; 
+
+    function result(){
+
+        m=document.getElementById("math").value;
+        e=document.getElementById("eng").value;
+        h=document.getElementById("hindi").value;
+        s=document.getElementById("science").value;
+        c=document.getElementById("computer").value;
+        pt=document.getElementById("PT").value
+        m = parseInt(m);
+        e = parseInt(e);
+        h = parseInt(h);
+        s = parseInt(s);
+        c = parseInt(c);
+        pt= parseInt(pt);
+    
+        A=m+e+h+s+c+pt;
+        A=document.getElementById("Addition").value=A;
+        
+        p=A/6;
+        p=document.getElementById("persentage").value=p;
+
+
+        if(p<35){
+            document.getElementById("grade").value="Fail";
+        }else if(p >= 35 && p < 50)
+        {
+            document.getElementById("grade").value="C";
+        }else if(p >= 50 && p < 70)
+        {
+            document.getElementById("grade").value="B";
+        }else if(p >= 70 && p < 80)
+        {
+            document.getElementById("grade").value="B+";
+        }else if(p >= 80 && p < 90)
+        {
+            document.getElementById("grade").value="A";
+        }else if(p >= 90 && p <= 100)
+        {
+            document.getElementById("grade").value="A++";
+        }
+    }
+    
+    function validate(){
+        rn=document.getElementById("rollNo").value;
+        n=document.getElementById("Name").value;
+        m=document.getElementById("math").value;
+        e=document.getElementById("eng").value;
+        h=document.getElementById("hindi").value;
+        s=document.getElementById("science").value;
+        c=document.getElementById("computer").value;
+        pt=document.getElementById("PT").value;
+
+        if(rn==""){
+            alert("Roll No. cannot be empty");
+            document.getElementById("rollNo").focus();
+            return false;
+        }
+        if(n==""){
+            alert("Name cannot be empty");
+            document.getElementById("Name").focus();
+            return false;
+        }
+        if(m==""){
+            alert("Math marks cannot be empty");
+            document.getElementById("math").focus();
+            return false;
+        }
+        if(e==""){
+            alert("eng marks cannot be empty");
+            document.getElementById("eng").focus();
+            return false;
+        }
+        if(h==""){
+            alert("hindi marks cannot be empty");
+            document.getElementById("hindi").focus();
+            return false;
+        }
+        if(s==""){
+            alert("science marks cannot be empty");
+            document.getElementById("science").focus();
+            return false;
+        }
+        if(c==""){
+            alert("computer marks cannot be empty");
+            document.getElementById("computer").focus();
+            return false;
+        }
+        if(pt==""){
+            alert("pt marks cannot be empty");
+            document.getElementById("PT").focus();
+            return false;
+        }
+        
+        if(m>100 || m<0){
+            alert("invalid Math marks");
+            document.getElementById("math").focus();
+            return false;
+        }
+        if(e>100 || e<0){
+            alert("invalid english marks");
+            document.getElementById("eng").focus();
+            return false;
+        }
+        if(h>100 || h<0){
+            alert("invalid Hindi marks");
+            document.getElementById("hindi").focus();
+            return false;
+        }
+        if(s>100 || s<0){
+            alert("invalid science marks");
+            document.getElementById("science").focus();
+            return false;
+        }
+        if(c>100 || c<0){
+            alert("invalid computer marks");
+            document.getElementById("computer").focus();
+            return false;
+        }
+        if(pt>100 || pt<0){
+            alert("invalid PT marks");
+            document.getElementById("pt").focus();
+            return false;
+        }
+                  
+    }
+
+    function clearForm(){
+        document.getElementById("marksForm").reset();
+    }
+</script>
+</html>
